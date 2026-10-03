@@ -22,8 +22,8 @@ jobs:
         uses: aormsby/Fork-Sync-With-Upstream-Action@v3.4.1
         with:
           upstream_sync_repo: 'NateScarlet/holiday-cn' 
-          upstream_sync_branch: 'main'           # 上游的分支名（如 main 或 master）
-          target_sync_branch: 'main'             # 你的分支名（如 main 或 master）
+          upstream_sync_branch: 'master'           # 上游的分支名（如 main 或 master）
+          target_sync_branch: 'master'             # 你的分支名（如 main 或 master）
           test_mode: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
