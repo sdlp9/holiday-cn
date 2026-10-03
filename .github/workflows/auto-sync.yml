@@ -2,7 +2,7 @@ name: Auto Sync Upstream
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 每天北京时间早上 8 点自动执行
+    - cron: '0 0 1 11 *' # 每天北京时间早上 8 点自动执行
   workflow_dispatch: # 允许在 Actions 页面手动点击触发
 
 # 显式声明授予写权限，双重保险
