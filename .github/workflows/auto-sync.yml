@@ -2,8 +2,12 @@ name: Auto Sync Upstream
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 每天北京时间早上 8 点执行
-  workflow_dispatch: # 允许手动触发
+    - cron: '0 0 * * *' # 每天北京时间早上 8 点自动执行
+  workflow_dispatch: # 允许在 Actions 页面手动点击触发
+
+# 显式声明授予写权限，双重保险
+permissions:
+  contents: write
 
 jobs:
   sync:
@@ -12,14 +16,14 @@ jobs:
       - name: Checkout target repo
         uses: actions/checkout@v4
         with:
-          persist-credentials: false
+          persist-credentials: true # 必须设为 true，后续同步才持有写入凭证
 
       - name: Sync upstream changes
         uses: aormsby/Fork-Sync-With-Upstream-Action@v3.4.1
         with:
-          upstream_sync_repo: 'NateScarlet/holiday-cn' # 例: torvalds/linux
-          upstream_sync_branch: 'main'           # 上游分支
-          target_sync_branch: 'main'             # 你的分支
+          upstream_sync_repo: 'NateScarlet/holiday-cn' 
+          upstream_sync_branch: 'main'           # 上游的分支名（如 main 或 master）
+          target_sync_branch: 'main'             # 你的分支名（如 main 或 master）
           test_mode: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
